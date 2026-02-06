@@ -1,0 +1,6 @@
+@CineTrack.Api_HostAddress = http://localhost:5000
+
+GET {{CineTrack.Api_HostAddress}}/api/weather/
+Accept: application/json
+
+###

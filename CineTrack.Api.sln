@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineTrack.Api", "CineTrack.Api\CineTrack.Api.csproj", "{52F642FC-B1E3-49C2-9C32-A4C2A642D5A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineTrack.App", "CineTrack.App\CineTrack.App.csproj", "{51960C67-C684-4AAB-BFAA-5C0C89C26439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineTrack.Domain", "CineTrack.Domain\CineTrack.Domain.csproj", "{66EB6938-9D22-423A-B2C9-D63102A143F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineTrack.Infrastructure", "CineTrack.Infrastructure\CineTrack.Infrastructure.csproj", "{1BCE1150-2C4E-4306-9025-A75E8BCF9EFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{40360BD1-B512-4B4E-AE45-FDB647A60666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineTrack.Domain.Tests", "CineTrack.Domain.Tests\CineTrack.Domain.Tests.csproj", "{D1D5C8AF-BA11-4828-97AC-72B9FC6144B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineTrack.App.Tests", "CineTrack.App.Tests\CineTrack.App.Tests.csproj", "{586C9834-D173-418F-8275-16998E6B436E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52F642FC-B1E3-49C2-9C32-A4C2A642D5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F642FC-B1E3-49C2-9C32-A4C2A642D5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F642FC-B1E3-49C2-9C32-A4C2A642D5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F642FC-B1E3-49C2-9C32-A4C2A642D5A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51960C67-C684-4AAB-BFAA-5C0C89C26439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51960C67-C684-4AAB-BFAA-5C0C89C26439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51960C67-C684-4AAB-BFAA-5C0C89C26439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51960C67-C684-4AAB-BFAA-5C0C89C26439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66EB6938-9D22-423A-B2C9-D63102A143F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66EB6938-9D22-423A-B2C9-D63102A143F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66EB6938-9D22-423A-B2C9-D63102A143F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66EB6938-9D22-423A-B2C9-D63102A143F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCE1150-2C4E-4306-9025-A75E8BCF9EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCE1150-2C4E-4306-9025-A75E8BCF9EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCE1150-2C4E-4306-9025-A75E8BCF9EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCE1150-2C4E-4306-9025-A75E8BCF9EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1D5C8AF-BA11-4828-97AC-72B9FC6144B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D5C8AF-BA11-4828-97AC-72B9FC6144B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D5C8AF-BA11-4828-97AC-72B9FC6144B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D5C8AF-BA11-4828-97AC-72B9FC6144B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586C9834-D173-418F-8275-16998E6B436E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586C9834-D173-418F-8275-16998E6B436E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586C9834-D173-418F-8275-16998E6B436E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586C9834-D173-418F-8275-16998E6B436E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1D5C8AF-BA11-4828-97AC-72B9FC6144B2} = {40360BD1-B512-4B4E-AE45-FDB647A60666}
+		{586C9834-D173-418F-8275-16998E6B436E} = {40360BD1-B512-4B4E-AE45-FDB647A60666}
+	EndGlobalSection
+EndGlobal
