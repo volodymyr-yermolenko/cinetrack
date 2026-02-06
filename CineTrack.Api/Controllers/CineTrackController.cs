@@ -16,6 +16,7 @@ public class CineTrackController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     
+    [HttpGet("movies")]
     public async Task<IActionResult> GetMovies()
     {
         // Implement the logic to get movies here
