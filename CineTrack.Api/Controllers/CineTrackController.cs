@@ -15,4 +15,10 @@ public class CineTrackController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(command);
         return Ok(result);
     }
+    
+    public async Task<IActionResult> GetMovies()
+    {
+        // Implement the logic to get movies here
+        return Ok();
+    }
 }
