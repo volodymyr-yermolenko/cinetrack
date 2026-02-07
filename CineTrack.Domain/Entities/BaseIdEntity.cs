@@ -1,6 +1,6 @@
 namespace CineTrack.Domain.Entities;
 
-public class BaseIdEntity
+public abstract class BaseIdEntity
 {
     public int Id { get; set; }
 }
