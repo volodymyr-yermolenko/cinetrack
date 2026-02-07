@@ -1,4 +1,5 @@
 using CineTrack.App.Features.Genres.GetGenres;
+using CineTrack.App.Features.Movies.GetMovies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,15 +12,16 @@ public class CineTrackController(IMediator mediator) : ControllerBase
     [HttpGet("genres")]
     public async Task<IActionResult> GetGenres()
     {
-        var command = new GetGenresCommand();
+        var command = new GetGenresRequest();
         var result = await mediator.Send(command);
         return Ok(result);
     }
     
-    [HttpGet("movies")]
-    public async Task<IActionResult> GetMovies()
+    [HttpGet("movies/{userId:int}")]
+    public async Task<IActionResult> GetMovies(int userId)
     {
-        // Implement the logic to get movies here
-        return Ok();
+        var command = new GetMoviesRequest(userId);
+        var result = await mediator.Send(command);
+        return Ok(result);
     }
 }

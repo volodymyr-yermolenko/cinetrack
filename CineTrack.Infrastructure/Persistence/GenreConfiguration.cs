@@ -10,7 +10,6 @@ public class GenreConfiguration : IEntityTypeConfiguration<Genre>
     {
         builder.ToTable("Genres");
         builder.HasKey(p => p.Id);
-        //builder.Property(p => p.Id).ValueGeneratedOnAdd();
-        builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
+        builder.Property(p => p.Name).HasMaxLength(50);
     }
 }

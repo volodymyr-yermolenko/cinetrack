@@ -9,6 +9,6 @@ public class GenreRepository(AppDbContext context) : IGenreRepository
 {
     public Task<List<Genre>> GetGenresAsync()
     {
-        return context.Genres.ToListAsync();
+        return context.Genres.OrderBy(g => g.Name).ToListAsync();
     }
 }
