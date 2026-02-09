@@ -4,7 +4,7 @@ namespace CineTrack.Domain.Entities;
 
 public class Movie : BaseIdEntity
 {
-    public required string Title { get; set; }
+    public string Title { get; set; } = null!;
     public int ReleaseYear { get; set; }
     public MovieType MovieType { get; set; }
     public string? ImageUrl { get; set; }

@@ -1,5 +1,5 @@
+using CineTrack.App.Interfaces;
 using CineTrack.Domain.Entities;
-using CineTrack.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CineTrack.Infrastructure.Persistence;

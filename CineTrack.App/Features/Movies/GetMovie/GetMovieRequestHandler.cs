@@ -10,14 +10,10 @@ public class GetMovieRequestHandler(IMovieRepository repository, IMapper mapper)
 {
     public async Task<MovieDto> Handle(GetMovieRequest request, CancellationToken cancellationToken)
     {
-        var movie = await repository.GetMovieAsync(request.MovieId);
+        var movie = await repository.GetMovieAsync(request.UserId, request.MovieId);
         if (movie == null)
         {
             throw new AppNotFoundException("Movie not found");
-        }
-        if (movie.UserId != request.UserId)
-        {
-            throw new AppForbiddenException("Unauthorized access");
         }
 
         return mapper.Map<MovieDto>(movie);

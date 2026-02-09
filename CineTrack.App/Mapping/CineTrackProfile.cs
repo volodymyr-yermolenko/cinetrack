@@ -10,5 +10,9 @@ public class CineTrackProfile : Profile
     {
         CreateMap<Genre, GenreDto>();
         CreateMap<Movie, MovieDto>();
+        CreateMap<AddMovieDto, Movie>()
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Trim()));
+        CreateMap<UpdateMovieDto, Movie>()
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Trim()));
     }
 }

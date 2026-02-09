@@ -1,10 +1,10 @@
+using CineTrack.App.Interfaces;
 using CineTrack.Domain.Enums;
 
 namespace CineTrack.App.Models;
 
-public class MovieDto
+public class UpdateMovieDto : IMovieAttributes
 {
-    public int Id { get; init; }
     public required string Title { get; init; }
     public int ReleaseYear { get; init; }
     public MovieType MovieType { get; init; }

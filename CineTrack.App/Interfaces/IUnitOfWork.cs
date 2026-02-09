@@ -1,4 +1,4 @@
-namespace CineTrack.Domain.Interfaces;
+namespace CineTrack.App.Interfaces;
 
 public interface IUnitOfWork
 {

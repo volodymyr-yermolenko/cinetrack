@@ -1,4 +1,5 @@
 using CineTrack.App.Features.Genres.GetGenres;
+using CineTrack.App.Features.Movies.Validators;
 using CineTrack.App.Interfaces;
 using CineTrack.Infrastructure.Repositories;
 
@@ -12,6 +13,7 @@ public static class ServiceRegistrations
         services.AddAutoMapper(cfg => cfg.AddMaps(typeof(GetGenresRequestHandler).Assembly));
         services.AddScoped<IGenreRepository, GenreRepository>();
         services.AddScoped<IMovieRepository, MovieRepository>();
+        services.AddScoped<MovieCommandValidator>();
         return services;
     }
 }
