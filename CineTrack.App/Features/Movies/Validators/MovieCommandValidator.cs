@@ -1,3 +1,4 @@
+using CineTrack.App.Common;
 using CineTrack.App.Exceptions;
 using CineTrack.App.Extentions;
 using CineTrack.App.Interfaces;
@@ -10,7 +11,7 @@ public class MovieCommandValidator(IMovieRepository repository)
     {
         if (await repository.MovieExistsAsync(movie.Title, movie.ReleaseYear, userId)) 
         {
-            throw new AppValidationException("Movie with the same title and release year already exists");
+            throw new AppValidationException(ErrorMessages.DuplicateMovie);
         }
         ValidateMovie(movie);
     }
@@ -19,7 +20,7 @@ public class MovieCommandValidator(IMovieRepository repository)
     {
         if (await repository.MovieExistsAsync(movie.Title, movie.ReleaseYear, userId, movieId)) 
         {
-            throw new AppValidationException("Movie with the same title and release year already exists");
+            throw new AppValidationException(ErrorMessages.DuplicateMovie);
         }
         ValidateMovie(movie);
     }
@@ -28,19 +29,19 @@ public class MovieCommandValidator(IMovieRepository repository)
     {
         if (!movie.MovieType.IsValidEnum())
         {
-            throw new AppValidationException("Invalid movie type");
+            throw new AppValidationException(ErrorMessages.InvalidMovieType);
         }
-        if (movie.ReleaseYear > DateTime.Now.Year) 
+        if (movie.ReleaseYear > DateTime.UtcNow.Year) 
         {
-            throw new  AppValidationException("Release year cannot be in the future");
+            throw new AppValidationException(ErrorMessages.ReleaseYearInFuture);
         }
         if (movie.ReleaseYear < 1900) 
         {
-            throw new AppValidationException("Release year cannot be before 1900");
+            throw new AppValidationException(ErrorMessages.ReleaseYearBefore1900);
         }
         if (movie.ImageUrl != null && !Uri.IsWellFormedUriString(movie.ImageUrl, UriKind.Absolute)) 
         {
-            throw new AppValidationException("Invalid image URL");
+            throw new AppValidationException(ErrorMessages.InvalidImageUrl);
         }
     }
 }

@@ -10,5 +10,7 @@ public class Movie : BaseIdEntity
     public string? ImageUrl { get; set; }
     public int UserId { get; set; }
     public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }    
+    public DateTime UpdatedAt { get; set; } 
+    
+    public IEnumerable<WatchEntry> WatchEntries { get; set; } = null!;
 }

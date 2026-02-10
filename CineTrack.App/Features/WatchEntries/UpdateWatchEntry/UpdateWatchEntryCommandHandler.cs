@@ -1,0 +1,32 @@
+using AutoMapper;
+using CineTrack.App.Common;
+using CineTrack.App.Exceptions;
+using CineTrack.App.Features.WatchEntries.Validators;
+using CineTrack.App.Interfaces;
+using MediatR;
+
+namespace CineTrack.App.Features.WatchEntries.UpdateWatchEntry;
+
+public class UpdateWatchEntryCommandHandler(IWatchEntryRepository repository, IMapper mapper, WatchEntryCommandValidator validator)
+    : IRequestHandler<UpdateWatchEntryCommand, Unit>
+{
+    public async Task<Unit> Handle(UpdateWatchEntryCommand command, CancellationToken cancellationToken)
+    {
+        await validator.ValidateWatchEntryUpdateAsync(command.UserId, command.WatchEntryId, command.WatchEntry);
+
+        var watchEntryDto = command.WatchEntry;
+        var watchEntry = await repository.GetWatchEntryAsync(command.UserId, command.WatchEntryId);
+        if (watchEntry == null)
+        {
+            throw new AppNotFoundException(ErrorMessages.WatchEntryNotFound);
+        }
+        
+        mapper.Map(watchEntryDto, watchEntry);
+        watchEntry.UpdatedAt = DateTime.UtcNow;
+        
+        repository.UpdateWatchEntry(watchEntry);
+        await repository.UnitOfWork.SaveChangesAsync();
+        
+        return Unit.Value;
+    }
+}

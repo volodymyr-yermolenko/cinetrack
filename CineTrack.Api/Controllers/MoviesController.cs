@@ -1,4 +1,4 @@
-using CineTrack.App.Features.Movies.AddMovie;
+using CineTrack.App.Features.Movies.CreateMovie;
 using CineTrack.App.Features.Movies.DeleteMovie;
 using CineTrack.App.Features.Movies.GetMovie;
 using CineTrack.App.Features.Movies.GetMovies;
@@ -35,9 +35,9 @@ public class MoviesController(IMediator mediator) : ControllerBase
 
     [HttpPost("")]
     [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
-    public async Task<IActionResult> AddMovie([FromBody] AddMovieDto movie) 
+    public async Task<IActionResult> CreateMovie([FromBody] CreateMovieDto movie) 
     {
-        var command = new AddMovieCommand(DevUserId) { Movie = movie };
+        var command = new CreateMovieCommand(DevUserId) { Movie = movie };
         var result = await mediator.Send(command);
         return CreatedAtAction(nameof(GetMovie), new { id = result }, result);
     }

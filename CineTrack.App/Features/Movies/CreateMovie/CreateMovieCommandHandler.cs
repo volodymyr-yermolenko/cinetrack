@@ -4,19 +4,21 @@ using CineTrack.App.Interfaces;
 using CineTrack.Domain.Entities;
 using MediatR;
 
-namespace CineTrack.App.Features.Movies.AddMovie;
+namespace CineTrack.App.Features.Movies.CreateMovie;
 
-public class AddMovieCommandHandler(IMovieRepository repository, IMapper mapper, MovieCommandValidator validator) 
-    : IRequestHandler<AddMovieCommand, int>
+public class CreateMovieCommandHandler(IMovieRepository repository, IMapper mapper, MovieCommandValidator validator) 
+    : IRequestHandler<CreateMovieCommand, int>
 {
-    public async Task<int> Handle(AddMovieCommand command, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateMovieCommand command, CancellationToken cancellationToken)
     {
         await validator.ValidateMovieCreationAsync(command.UserId, command.Movie);
         
         var movie = mapper.Map<Movie>(command.Movie);
         movie.UserId = command.UserId;
-        movie.CreatedAt = DateTime.Now;
-        movie.UpdatedAt = DateTime.Now;
+        
+        var now = DateTime.UtcNow;
+        movie.CreatedAt = now;
+        movie.UpdatedAt = now;
         
         await repository.AddMovieAsync(movie);
         await repository.UnitOfWork.SaveChangesAsync();

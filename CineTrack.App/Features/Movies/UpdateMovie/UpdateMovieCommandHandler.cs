@@ -1,4 +1,5 @@
 using AutoMapper;
+using CineTrack.App.Common;
 using CineTrack.App.Exceptions;
 using CineTrack.App.Features.Movies.Validators;
 using CineTrack.App.Interfaces;
@@ -17,7 +18,7 @@ public class UpdateMovieCommandHandler(IMovieRepository repository, IMapper mapp
         var movie = await repository.GetMovieAsync(command.UserId, command.MovieId);
         if (movie == null)
         {
-            throw new AppNotFoundException("Movie not found");
+            throw new AppNotFoundException(ErrorMessages.MovieNotFound);
         }
         mapper.Map(movieDto, movie);
         movie.UpdatedAt = DateTime.UtcNow;

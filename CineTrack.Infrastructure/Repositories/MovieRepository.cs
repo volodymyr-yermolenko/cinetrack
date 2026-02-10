@@ -19,7 +19,8 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
 
     public Task<Movie?> GetMovieAsync(int userId, int movieId)
     {
-        return context.Movies.FirstOrDefaultAsync(m => m.UserId == userId && m.Id == movieId);
+        return context.Movies
+            .FirstOrDefaultAsync(m => m.UserId == userId && m.Id == movieId);
     }
 
     public async Task AddMovieAsync(Movie movie)
@@ -39,6 +40,7 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
     
     public Task<bool> MovieExistsAsync(string title, int releaseYear, int userId, int exceptMovieId = 0)
     {
-        return context.Movies.AnyAsync(m => m.Title == title.Trim() && m.ReleaseYear == releaseYear && m.UserId == userId && m.Id != exceptMovieId);
+        return context.Movies.AnyAsync(m => m.Title == title.Trim() && m.ReleaseYear == releaseYear 
+            && m.UserId == userId && m.Id != exceptMovieId);
     }
 }

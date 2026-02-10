@@ -10,9 +10,15 @@ public class CineTrackProfile : Profile
     {
         CreateMap<Genre, GenreDto>();
         CreateMap<Movie, MovieDto>();
-        CreateMap<AddMovieDto, Movie>()
+        CreateMap<WatchEntry, WatchEntryDto>()
+            .ForMember(dest => dest.Movie, opt => opt.MapFrom(src => src.Movie));
+        
+        
+        CreateMap<CreateMovieDto, Movie>()
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Trim()));
         CreateMap<UpdateMovieDto, Movie>()
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Trim()));
+        CreateMap<CreateWatchEntryDto, WatchEntry>();
+        CreateMap<UpdateWatchEntryDto, WatchEntry>();
     }
 }

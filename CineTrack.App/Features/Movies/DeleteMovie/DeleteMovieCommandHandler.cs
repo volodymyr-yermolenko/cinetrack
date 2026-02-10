@@ -1,3 +1,4 @@
+using CineTrack.App.Common;
 using CineTrack.App.Exceptions;
 using CineTrack.App.Interfaces;
 using MediatR;
@@ -12,7 +13,7 @@ public class DeleteMovieCommandHandler(IMovieRepository repository)
         var movie = await repository.GetMovieAsync(request.UserId, request.MovieId);
         if (movie == null)
         {
-            throw new AppNotFoundException("Movie not found");
+            throw new AppNotFoundException(ErrorMessages.MovieNotFound);
         }
         
         repository.DeleteMovie(movie);

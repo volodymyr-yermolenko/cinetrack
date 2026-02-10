@@ -1,4 +1,5 @@
 using AutoMapper;
+using CineTrack.App.Common;
 using CineTrack.App.Exceptions;
 using CineTrack.App.Interfaces;
 using CineTrack.App.Models;
@@ -13,7 +14,7 @@ public class GetMovieRequestHandler(IMovieRepository repository, IMapper mapper)
         var movie = await repository.GetMovieAsync(request.UserId, request.MovieId);
         if (movie == null)
         {
-            throw new AppNotFoundException("Movie not found");
+            throw new AppNotFoundException(ErrorMessages.MovieNotFound);
         }
 
         return mapper.Map<MovieDto>(movie);

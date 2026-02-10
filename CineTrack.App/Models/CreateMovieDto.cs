@@ -3,7 +3,7 @@ using CineTrack.Domain.Enums;
 
 namespace CineTrack.App.Models;
 
-public class AddMovieDto : IMovieAttributes
+public class CreateMovieDto : IMovieAttributes
 {
     public required string Title { get; init; }
     public int ReleaseYear { get; init; }
