@@ -5,7 +5,7 @@ using CineTrack.App.Interfaces;
 
 namespace CineTrack.App.Features.Movies.Validators;
 
-public class MovieCommandValidator(IMovieRepository repository)
+public class MovieCommandValidator(IMovieRepository repository, IGenreRepository genreRepository)
 {
     public async Task ValidateMovieCreationAsync(int userId, IMovieAttributes movie)
     {
@@ -13,7 +13,7 @@ public class MovieCommandValidator(IMovieRepository repository)
         {
             throw new AppValidationException(ErrorMessages.DuplicateMovie);
         }
-        ValidateMovie(movie);
+        await ValidateMovieAsync(movie);
     }
 
     public async Task ValidateMovieUpdateAsync(int userId, int movieId, IMovieAttributes movie)
@@ -22,11 +22,19 @@ public class MovieCommandValidator(IMovieRepository repository)
         {
             throw new AppValidationException(ErrorMessages.DuplicateMovie);
         }
-        ValidateMovie(movie);
+        await ValidateMovieAsync(movie);
     }
 
-    private static void ValidateMovie(IMovieAttributes movie)
+    private async Task ValidateMovieAsync(IMovieAttributes movie)
     {
+        if (movie.GenreIds.Count == 0)
+        {
+            throw new AppValidationException(ErrorMessages.MovieMustHaveGenres);
+        }
+        if (!await genreRepository.AllGenresExistAsync(movie.GenreIds))
+        {
+            throw new AppValidationException(ErrorMessages.SomeGenresNotExist);
+        }
         if (!movie.MovieType.IsValidEnum())
         {
             throw new AppValidationException(ErrorMessages.InvalidMovieType);

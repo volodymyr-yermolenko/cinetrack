@@ -7,7 +7,11 @@ using MediatR;
 
 namespace CineTrack.App.Features.Movies.UpdateMovie;
 
-public class UpdateMovieCommandHandler(IMovieRepository repository, IMapper mapper, MovieCommandValidator validator) 
+public class UpdateMovieCommandHandler(
+    IMovieRepository repository, 
+    IGenreRepository genreRepository, 
+    IMapper mapper, 
+    MovieCommandValidator validator) 
     : IRequestHandler<UpdateMovieCommand, Unit>
 {
     public async Task<Unit> Handle(UpdateMovieCommand command, CancellationToken cancellationToken)
@@ -20,6 +24,10 @@ public class UpdateMovieCommandHandler(IMovieRepository repository, IMapper mapp
         {
             throw new AppNotFoundException(ErrorMessages.MovieNotFound);
         }
+        
+        var genres = await genreRepository.GetGenresByIdsAsync(movieDto.GenreIds);
+        movie.Genres = genres;
+        
         mapper.Map(movieDto, movie);
         movie.UpdatedAt = DateTime.UtcNow;
         

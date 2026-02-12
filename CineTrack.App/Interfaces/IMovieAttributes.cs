@@ -8,4 +8,5 @@ public interface IMovieAttributes
     int ReleaseYear { get; }
     MovieType MovieType { get; }
     string? ImageUrl { get; }
+    List<int> GenreIds { get; }
 }

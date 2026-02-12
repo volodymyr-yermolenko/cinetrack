@@ -6,15 +6,23 @@ using MediatR;
 
 namespace CineTrack.App.Features.Movies.CreateMovie;
 
-public class CreateMovieCommandHandler(IMovieRepository repository, IMapper mapper, MovieCommandValidator validator) 
+public class CreateMovieCommandHandler(
+    IMovieRepository repository, 
+    IGenreRepository genreRepository,
+    IMapper mapper, 
+    MovieCommandValidator validator) 
     : IRequestHandler<CreateMovieCommand, int>
 {
     public async Task<int> Handle(CreateMovieCommand command, CancellationToken cancellationToken)
     {
         await validator.ValidateMovieCreationAsync(command.UserId, command.Movie);
-        
-        var movie = mapper.Map<Movie>(command.Movie);
+
+        var movieDto = command.Movie;
+        var movie = mapper.Map<Movie>(movieDto);
         movie.UserId = command.UserId;
+
+        var genres = await genreRepository.GetGenresByIdsAsync(movieDto.GenreIds);
+        movie.Genres = genres;
         
         var now = DateTime.UtcNow;
         movie.CreatedAt = now;

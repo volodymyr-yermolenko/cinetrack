@@ -12,5 +12,6 @@ public class Movie : BaseIdEntity
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; } 
     
-    public IEnumerable<WatchEntry> WatchEntries { get; set; } = null!;
+    public ICollection<Genre> Genres { get; set; } = null!;
+    public ICollection<WatchEntry> WatchEntries { get; set; } = null!;
 }

@@ -4,5 +4,7 @@ namespace CineTrack.App.Interfaces;
 
 public interface IGenreRepository
 {
-    public Task<List<Genre>> GetGenresAsync();
+    Task<List<Genre>> GetGenresAsync();
+    Task<List<Genre>> GetGenresByIdsAsync(List<int> genreIds);
+    Task<bool> AllGenresExistAsync(List<int> genreIds);
 }

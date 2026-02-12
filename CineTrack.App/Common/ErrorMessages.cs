@@ -8,6 +8,8 @@ public static class ErrorMessages
     public const string ReleaseYearInFuture = "Release year cannot be in the future";
     public const string ReleaseYearBefore1900 = "Release year cannot be before 1900";
     public const string InvalidImageUrl = "Invalid image URL";
+    public const string SomeGenresNotExist = "Some of the provided genre IDs do not exist";
+    public const string MovieMustHaveGenres = "Movie must have at least one genre";
     
     public const string WatchEntryNotFound = "Watch entry with provided ID is not found";
     public const string DuplicateWatchEntry = "Watch entry for the same movie and watching date already exists";

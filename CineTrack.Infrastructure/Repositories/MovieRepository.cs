@@ -12,6 +12,7 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
     public Task<List<Movie>> GetMoviesAsync(int userId)
     {
         return context.Movies
+            .Include(m => m.Genres.OrderBy(g => g.Name))
             .Where(m => m.UserId == userId)
             .OrderBy(m => m.Title)
             .ToListAsync();
@@ -20,6 +21,7 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
     public Task<Movie?> GetMovieAsync(int userId, int movieId)
     {
         return context.Movies
+            .Include(m => m.Genres.OrderBy(g => g.Name))                
             .FirstOrDefaultAsync(m => m.UserId == userId && m.Id == movieId);
     }
 

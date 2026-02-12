@@ -9,4 +9,5 @@ public class MovieDto
     public int ReleaseYear { get; init; }
     public MovieType MovieType { get; init; }
     public string? ImageUrl { get; init; }
+    public List<GenreDto> Genres { get; init; } = [];
 }

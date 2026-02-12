@@ -9,4 +9,5 @@ public class UpdateMovieDto : IMovieAttributes
     public int ReleaseYear { get; init; }
     public MovieType MovieType { get; init; }
     public string? ImageUrl { get; init; }
+    public required List<int> GenreIds { get; init; }    
 }
