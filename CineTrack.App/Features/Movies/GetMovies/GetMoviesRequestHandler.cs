@@ -10,7 +10,7 @@ public class GetMoviesRequestHandler(IMovieRepository repository, IMapper mapper
 {
     public async Task<List<MovieDto>> Handle(GetMoviesRequest request, CancellationToken cancellationToken)
     {
-        var movies = await repository.GetMoviesAsync(request.UserId);
+        var movies = await repository.GetMoviesAsync(request.UserId, request.GenreId);
         return mapper.Map<List<MovieDto>>(movies);
     }
 }

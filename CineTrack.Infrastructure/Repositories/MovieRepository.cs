@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using CineTrack.App.Interfaces;
 using CineTrack.Domain.Entities;
 using CineTrack.Infrastructure.Persistence;
@@ -9,11 +10,15 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
 {
     public IUnitOfWork UnitOfWork => context;
     
-    public Task<List<Movie>> GetMoviesAsync(int userId)
+    public Task<List<Movie>> GetMoviesAsync(int userId, int? genreId)
     {
+        Expression<Func<Movie, bool>> whereClause = !genreId.HasValue 
+            ? (m => m.UserId == userId) 
+            : (m => m.UserId == userId && m.Genres.Any(g => g.Id == genreId.Value));
+
         return context.Movies
             .Include(m => m.Genres.OrderBy(g => g.Name))
-            .Where(m => m.UserId == userId)
+            .Where(whereClause)
             .OrderBy(m => m.Title)
             .ToListAsync();
     }
