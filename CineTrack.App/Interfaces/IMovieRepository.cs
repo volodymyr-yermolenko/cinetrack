@@ -5,7 +5,7 @@ namespace CineTrack.App.Interfaces;
 public interface IMovieRepository
 {
     IUnitOfWork UnitOfWork { get; }
-    Task<List<Movie>> GetMoviesAsync(int userId, int? genreId);
+    Task<List<Movie>> GetMoviesAsync(int userId, int? genreId, string? searchString);
     Task<Movie?> GetMovieAsync(int userId, int movieId);
     Task AddMovieAsync(Movie movie);
     void UpdateMovie(Movie movie);

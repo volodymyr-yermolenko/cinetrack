@@ -17,9 +17,9 @@ public class MoviesController(IMediator mediator) : ControllerBase
     
     [HttpGet("")]
     [ProducesResponseType(typeof(List<MovieDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMovies([FromQuery] int? genreId)
+    public async Task<IActionResult> GetMovies([FromQuery] int? genreId, [FromQuery] string? search)
     {
-        var request = new GetMoviesRequest(DevUserId) { GenreId = genreId };
+        var request = new GetMoviesRequest(DevUserId) { GenreId = genreId, SearchString = search };
         var result = await mediator.Send(request);
         return Ok(result);
     }

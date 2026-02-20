@@ -8,4 +8,5 @@ public class GetMoviesRequest(int userId) : IRequest<List<MovieDto>>
 {
     public int UserId { get; } = userId;
     public int? GenreId { get; init; }
+    public string? SearchString { get; init; }
 }
