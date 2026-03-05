@@ -26,7 +26,7 @@ public class MoviesController(IMediator mediator) : ControllerBase
     
     [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(MovieDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMovie(int id)
+    public async Task<IActionResult> GetMovie([FromRoute] int id)
     {
         var request = new GetMovieRequest(DevUserId) { MovieId = id };
         var result = await mediator.Send(request);
@@ -44,7 +44,7 @@ public class MoviesController(IMediator mediator) : ControllerBase
     
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> UpdateMovie(int id, [FromBody] UpdateMovieDto movie) 
+    public async Task<IActionResult> UpdateMovie([FromRoute] int id, [FromBody] UpdateMovieDto movie) 
     {
         var command = new UpdateMovieCommand(DevUserId) { MovieId = id, Movie = movie };
         await mediator.Send(command);
@@ -53,7 +53,7 @@ public class MoviesController(IMediator mediator) : ControllerBase
     
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> DeleteMovie(int id) 
+    public async Task<IActionResult> DeleteMovie([FromRoute] int id) 
     {
         var command = new DeleteMovieCommand(DevUserId) { MovieId = id };
         await mediator.Send(command);
