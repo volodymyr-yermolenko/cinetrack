@@ -8,5 +8,5 @@ public interface IWatchEntryAttributes
     int Rating { get; }
     ViewingContextType ViewingContext { get; }
     DateTime WatchedAt { get; }
-    string? Mood { get; }
+    string? Impression { get; }
 }

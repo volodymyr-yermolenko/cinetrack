@@ -12,17 +12,18 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
     
     public Task<List<Movie>> GetMoviesAsync(int userId, int? genreId, string? searchString)
     {
-        Expression<Func<Movie, bool>> whereClause = !genreId.HasValue 
-            ? (m => m.UserId == userId) 
-            : (m => m.UserId == userId && m.Genres.Any(g => g.Id == genreId.Value));
-
         var query = context.Movies
             .Include(m => m.Genres.OrderBy(g => g.Name))
-            .Where(whereClause);
-        
-        if (!string.IsNullOrWhiteSpace(searchString))
+            .Where(m => m.UserId == userId);
+
+        if (genreId.HasValue)
         {
-            query = query.Where(m => m.UserId == userId && m.Title.Contains(searchString.Trim()));
+            query = query.Where(m => m.Genres.Any(g => g.Id == genreId.Value));
+        }
+
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            query = query.Where(m => m.Title.Contains(searchString.Trim()));
         }
 
         return query

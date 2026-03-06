@@ -17,16 +17,16 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
     
     [HttpGet("")]
     [ProducesResponseType(typeof(List<WatchEntryDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetWatchEntries()
+    public async Task<IActionResult> GetWatchEntries([FromQuery] int? genreId, [FromQuery] string? search)
     {
-        var request = new GetWatchEntriesRequest(DevUserId);
+        var request = new GetWatchEntriesRequest(DevUserId) { GenreId = genreId, SearchString = search };
         var result = await mediator.Send(request);
         return Ok(result);
     }
     
     [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(WatchEntryDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetWatchEntry(int id)
+    public async Task<IActionResult> GetWatchEntry([FromRoute] int id)
     {
         var request = new GetWatchEntryRequest(DevUserId) { WatchEntryId = id };
         var result = await mediator.Send(request);
@@ -44,7 +44,7 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
 
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> UpdateWatchEntry(int id, [FromBody] UpdateWatchEntryDto watchEntry)
+    public async Task<IActionResult> UpdateWatchEntry([FromRoute] int id, [FromBody] UpdateWatchEntryDto watchEntry)
     {
         var command = new UpdateWatchEntryCommand(DevUserId) { WatchEntryId = id, WatchEntry = watchEntry };
         await mediator.Send(command);
@@ -53,7 +53,7 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
     
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> DeleteWatchEntry(int id)
+    public async Task<IActionResult> DeleteWatchEntry([FromRoute] int id)
     {
         var command = new DeleteWatchEntryCommand(DevUserId) { WatchEntryId = id };
         await mediator.Send(command);

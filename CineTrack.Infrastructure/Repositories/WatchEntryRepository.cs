@@ -9,11 +9,24 @@ public class WatchEntryRepository(AppDbContext context) : IWatchEntryRepository
 {
     public IUnitOfWork UnitOfWork => context;
     
-    public Task<List<WatchEntry>> GetWatchEntriesAsync(int userId)
+    public Task<List<WatchEntry>> GetWatchEntriesAsync(int userId, int? genreId, string? searchString)
     {
-        return context.WatchEntries
+        var query = context.WatchEntries
             .Include(w => w.Movie)
-            .Where(e => e.UserId == userId)
+            .ThenInclude(m => m.Genres.OrderBy(g => g.Name))
+            .Where(m => m.UserId == userId);
+
+        if (genreId.HasValue)
+        {
+            query = query.Where(m => m.Movie.Genres.Any(g => g.Id == genreId.Value));
+        }
+
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            query = query.Where(m => m.Movie.Title.Contains(searchString.Trim()));
+        }
+        
+        return query
             .OrderByDescending(e => e.WatchedAt)
             .ToListAsync();
     }

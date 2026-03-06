@@ -10,7 +10,7 @@ public class GetWatchEntriesRequestHandler(IWatchEntryRepository repository, IMa
 {
     public async Task<List<WatchEntryDto>> Handle(GetWatchEntriesRequest request, CancellationToken cancellationToken)
     {
-        var entries = await repository.GetWatchEntriesAsync(request.UserId);
+        var entries = await repository.GetWatchEntriesAsync(request.UserId, request.GenreId, request.SearchString);
         return mapper.Map<List<WatchEntryDto>>(entries);
     }
 }
