@@ -8,6 +8,6 @@ public class WatchEntryDto
     public int Rating { get; init; }
     public ViewingContextType ViewingContext { get; init; }
     public DateTime WatchedAt { get; init; }
-    public string? Impression { get; init; }
+    public string? Review { get; init; }
     public MovieDto Movie { get; init; } = null!;    
 }

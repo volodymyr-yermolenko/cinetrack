@@ -9,5 +9,5 @@ public class UpdateWatchEntryDto : IWatchEntryAttributes
     public int Rating { get; init; }
     public ViewingContextType ViewingContext { get; init; }
     public DateTime WatchedAt { get; init; }
-    public string? Impression { get; init; }
+    public string? Review { get; init; }
 }

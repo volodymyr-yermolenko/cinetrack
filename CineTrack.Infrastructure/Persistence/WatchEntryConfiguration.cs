@@ -11,7 +11,7 @@ public class WatchEntryConfiguration : IEntityTypeConfiguration<WatchEntry>
         builder.ToTable("WatchEntries");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.ViewingContext).HasConversion<int>();
-        builder.Property(p => p.Impression).HasMaxLength(200);
+        builder.Property(p => p.Review).HasMaxLength(200);
         
         builder.HasOne(p => p.Movie)
             .WithMany(m => m.WatchEntries)
