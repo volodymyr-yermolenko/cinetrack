@@ -39,7 +39,7 @@ Interactive API documentation is available via Swagger:
 To run this project locally, you'll need:
 
 - .NET 6.0 or higher
-- Visual Studio 2022 or Visual Studio Code
+- Visual Studio 2022 or JetBrains Rider
 - SQL Server / Azure SQL Database connection string
 
 ## 🚀 Getting Started
@@ -49,3 +49,4 @@ To run this project locally, you'll need:
 ```bash
 git clone https://github.com/volodymyr-yermolenko/cinetrack.git
 cd cinetrack
+for running, select the profile "CineTrack.Api: http"
