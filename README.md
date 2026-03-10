@@ -1,6 +1,6 @@
 # CineTrack - Backend API
 
-A modern REST API for tracking movies and cinema information, built with C# and ASP.NET Core.
+A REST API for tracking movies and cinema information, built with C# and ASP.NET Core.
 
 ## 🏗️ Architecture
 
