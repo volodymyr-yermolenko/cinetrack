@@ -4,7 +4,7 @@ A REST API for tracking movies and cinema information, built with C# and ASP.NET
 
 ## 🏗️ Architecture
 
-CineTrack follows a **clean, layered architecture** to ensure separation of concerns and maintainability:
+CineTrack follows clean architecture principles to ensure separation of concerns and maintainability:
 
 ### Project Structure
 
@@ -18,18 +18,16 @@ CineTrack follows a **clean, layered architecture** to ensure separation of conc
 The API is hosted on **Microsoft Azure**:
 - **Service**: Azure App Service
 - **Database**: Azure SQL Database
-- **Region**: Sweden Central
 
 ## 📖 API Documentation
 
-Interactive API documentation is available via Swagger:
+API documentation is available via Swagger:
 
 🔗 [**View Swagger Documentation**](https://cinetrack-g3cufqgbd2erh6ad.swedencentral-01.azurewebsites.net/swagger)
 
 ## 🛠️ Tech Stack
 
-- **Framework**: ASP.NET Core
-- **Language**: C#
+- **Framework**: ASP.NET Core, C#
 - **ORM**: Entity Framework Core
 - **Database**: Azure SQL Database
 - **Architecture Pattern**: Clean Architecture / Layered Architecture
@@ -40,7 +38,7 @@ To run this project locally, you'll need:
 
 - .NET 6.0 or higher
 - Visual Studio 2022 or JetBrains Rider
-- SQL Server / Azure SQL Database connection string
+- SQL Server IDE
 
 ## 🚀 Getting Started
 
