@@ -29,7 +29,9 @@ API documentation:
 ## 🛠️ Tech Stack
 
 - **Framework**: ASP.NET Core, C#
-- **ORM**: Entity Framework Core
+  - CQRS pattern with MediatR
+  - AutoMapper
+  - Entity Framework Core
 - **Database**: Azure SQL Database
 - **Architecture Pattern**: Clean Architecture / Layered Architecture
 
