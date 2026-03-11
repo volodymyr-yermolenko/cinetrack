@@ -1,6 +1,7 @@
 # CineTrack - Backend API
 
 A REST API for a 🔗 [**pet project**](https://cinetrack-ui.vercel.app/movies) (tracking movies and cinema information), built with C# and ASP.NET Core.
+Work is still in progress.
 
 
 ## 🏗️ Architecture
