@@ -22,8 +22,6 @@ The API is hosted on **Microsoft Azure**:
 
 ## 📖 API Documentation
 
-API documentation:
-
 🔗 [**View Swagger Documentation**](https://cinetrack-g3cufqgbd2erh6ad.swedencentral-01.azurewebsites.net/swagger)
 
 ## 🛠️ Tech Stack
