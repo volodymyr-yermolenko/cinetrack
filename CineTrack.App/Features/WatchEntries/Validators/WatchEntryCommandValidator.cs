@@ -9,7 +9,7 @@ public class WatchEntryCommandValidator(IWatchEntryRepository repository, IMovie
 {
     public async Task ValidateWatchEntryCreationAsync(int userId, IWatchEntryAttributes watchEntry)
     {
-        if (await repository.WatchEntryExistsAsync(userId, watchEntry.MovieId, watchEntry.WatchedAt)) 
+        if (await repository.WatchEntryExistsAsync(userId, watchEntry.MovieId, watchEntry.WatchedDate)) 
         {
             throw new AppValidationException(ErrorMessages.DuplicateWatchEntry);
         }
@@ -18,7 +18,7 @@ public class WatchEntryCommandValidator(IWatchEntryRepository repository, IMovie
 
     public async Task ValidateWatchEntryUpdateAsync(int userId, int watchEntryId, IWatchEntryAttributes watchEntry)
     {
-        if (await repository.WatchEntryExistsAsync(userId, watchEntry.MovieId, watchEntry.WatchedAt, watchEntryId)) 
+        if (await repository.WatchEntryExistsAsync(userId, watchEntry.MovieId, watchEntry.WatchedDate, watchEntryId)) 
         {
             throw new AppValidationException(ErrorMessages.DuplicateWatchEntry);
         }
@@ -36,11 +36,11 @@ public class WatchEntryCommandValidator(IWatchEntryRepository repository, IMovie
         {
             throw new AppValidationException(ErrorMessages.InvalidViewingContext);
         }
-        if (watchEntry.WatchedAt > DateTime.UtcNow) 
+        if (watchEntry.WatchedDate > DateTime.UtcNow) 
         {
             throw new  AppValidationException(ErrorMessages.WatchedDateInFuture);
         }
-        if (watchEntry.WatchedAt.Year < movie.ReleaseYear) 
+        if (watchEntry.WatchedDate.Year < movie.ReleaseYear) 
         {
             throw new AppValidationException(ErrorMessages.WatchedDateBeforeRelease);
         }

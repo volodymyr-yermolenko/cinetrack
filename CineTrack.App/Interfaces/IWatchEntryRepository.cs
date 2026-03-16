@@ -10,5 +10,5 @@ public interface IWatchEntryRepository
     Task AddWatchEntryAsync(WatchEntry watchEntry);
     void UpdateWatchEntry(WatchEntry watchEntry);
     void DeleteWatchEntry(WatchEntry watchEntry);
-    Task<bool> WatchEntryExistsAsync(int userId, int movieId, DateTime watchedAt, int exceptWatchEntryId = 0);
+    Task<bool> WatchEntryExistsAsync(int userId, int movieId, DateTime watchedDate, int exceptWatchEntryId = 0);
 }

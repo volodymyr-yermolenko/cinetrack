@@ -7,6 +7,6 @@ public interface IWatchEntryAttributes
     int MovieId { get; }
     int Rating { get; }
     ViewingContextType ViewingContext { get; }
-    DateTime WatchedAt { get; }
+    DateTime WatchedDate { get; }
     string? Review { get; }
 }

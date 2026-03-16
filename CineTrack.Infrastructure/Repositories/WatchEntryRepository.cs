@@ -27,7 +27,7 @@ public class WatchEntryRepository(AppDbContext context) : IWatchEntryRepository
         }
         
         return query
-            .OrderByDescending(e => e.WatchedAt)
+            .OrderByDescending(e => e.WatchedDate)
             .ToListAsync();
     }
 
@@ -53,9 +53,9 @@ public class WatchEntryRepository(AppDbContext context) : IWatchEntryRepository
         context.WatchEntries.Remove(watchEntry);
     }
 
-    public Task<bool> WatchEntryExistsAsync(int userId, int movieId, DateTime watchedAt, int exceptWatchEntryId = 0)
+    public Task<bool> WatchEntryExistsAsync(int userId, int movieId, DateTime watchedDate, int exceptWatchEntryId = 0)
     {
         return context.WatchEntries.AnyAsync(w => w.UserId == userId && w.MovieId == movieId 
-            && w.WatchedAt == watchedAt && w.Id != exceptWatchEntryId);
+            && w.WatchedDate == watchedDate && w.Id != exceptWatchEntryId);
     }
 }
