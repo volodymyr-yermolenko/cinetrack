@@ -7,7 +7,7 @@ public class WatchEntry : BaseIdEntity
     public int UserId { get; set; }
     public int MovieId { get; set; }
     public int Rating { get; set; }
-    public ViewingContextType ViewingContext { get; set; }
+    public ViewingContext ViewingContext { get; set; }
     public DateTime WatchedDate { get; set; }
     public string? Review { get; set; }
     public DateTime CreatedAt { get; set; }

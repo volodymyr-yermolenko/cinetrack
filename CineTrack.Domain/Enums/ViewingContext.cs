@@ -1,6 +1,6 @@
 namespace CineTrack.Domain.Enums;
 
-public enum ViewingContextType
+public enum ViewingContext
 {
     Alone = 1,
     WithPartner = 2,

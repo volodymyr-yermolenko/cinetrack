@@ -7,7 +7,7 @@ public class UpdateWatchEntryDto : IWatchEntryAttributes
 {
     public int MovieId { get; init; }
     public int Rating { get; init; }
-    public ViewingContextType ViewingContext { get; init; }
+    public ViewingContext ViewingContext { get; init; }
     public DateTime WatchedDate { get; init; }
     public string? Review { get; init; }
 }
