@@ -1,4 +1,4 @@
-namespace CineTrack.App.Extentions;
+namespace CineTrack.App.Extensions;
 
 public static class EnumExtensions
 {

@@ -1,4 +1,4 @@
-using CineTrack.App.Exceptions;
+using CineTrack.App.Common.Exceptions;
 
 namespace CineTrack.Api.Middlewares;
 

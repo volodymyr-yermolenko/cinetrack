@@ -1,7 +1,7 @@
-using CineTrack.App.Common;
-using CineTrack.App.Exceptions;
-using CineTrack.App.Interfaces;
 using MediatR;
+using CineTrack.App.Common.Constants;
+using CineTrack.App.Common.Exceptions;
+using CineTrack.App.Interfaces;
 
 namespace CineTrack.App.Features.Movies.DeleteMovie;
 

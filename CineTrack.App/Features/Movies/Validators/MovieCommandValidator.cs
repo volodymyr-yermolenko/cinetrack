@@ -1,6 +1,6 @@
-using CineTrack.App.Common;
-using CineTrack.App.Exceptions;
-using CineTrack.App.Extentions;
+using CineTrack.App.Common.Constants;
+using CineTrack.App.Common.Exceptions;
+using CineTrack.App.Extensions;
 using CineTrack.App.Interfaces;
 
 namespace CineTrack.App.Features.Movies.Validators;

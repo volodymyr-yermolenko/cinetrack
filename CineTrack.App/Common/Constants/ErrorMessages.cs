@@ -1,4 +1,4 @@
-namespace CineTrack.App.Common;
+namespace CineTrack.App.Common.Constants;
 
 public static class ErrorMessages
 {

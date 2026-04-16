@@ -1,4 +1,4 @@
-namespace CineTrack.App.Exceptions;
+namespace CineTrack.App.Common.Exceptions;
 
 public class AppValidationException(string message) : Exception(message)
 {

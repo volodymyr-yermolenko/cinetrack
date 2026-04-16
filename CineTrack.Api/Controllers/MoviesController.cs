@@ -5,6 +5,7 @@ using CineTrack.App.Features.Movies.GetMovies;
 using CineTrack.App.Features.Movies.UpdateMovie;
 using CineTrack.App.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CineTrack.Api.Controllers;
@@ -16,6 +17,7 @@ public class MoviesController(IMediator mediator) : ControllerBase
     private const int DevUserId = 1;
     
     [HttpGet("")]
+    [Authorize]
     [ProducesResponseType(typeof(List<MovieDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetMovies([FromQuery] int? genreId, [FromQuery] string? search)
     {

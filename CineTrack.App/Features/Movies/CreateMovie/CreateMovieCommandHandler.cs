@@ -1,15 +1,15 @@
 using AutoMapper;
+using MediatR;
 using CineTrack.App.Features.Movies.Validators;
 using CineTrack.App.Interfaces;
 using CineTrack.Domain.Entities;
-using MediatR;
 
 namespace CineTrack.App.Features.Movies.CreateMovie;
 
 public class CreateMovieCommandHandler(
     IMovieRepository repository, 
     IGenreRepository genreRepository,
-    IMapper mapper, 
+    IMapper mapper,
     MovieCommandValidator validator) 
     : IRequestHandler<CreateMovieCommand, int>
 {

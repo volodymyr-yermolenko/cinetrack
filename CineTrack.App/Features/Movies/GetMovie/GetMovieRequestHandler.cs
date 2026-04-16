@@ -1,9 +1,9 @@
 using AutoMapper;
-using CineTrack.App.Common;
-using CineTrack.App.Exceptions;
+using MediatR;
+using CineTrack.App.Common.Constants;
+using CineTrack.App.Common.Exceptions;
 using CineTrack.App.Interfaces;
 using CineTrack.App.Models;
-using MediatR;
 
 namespace CineTrack.App.Features.Movies.GetMovie;
 

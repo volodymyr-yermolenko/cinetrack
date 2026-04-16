@@ -8,6 +8,8 @@ public class CineTrackProfile : Profile
 {
     public CineTrackProfile()
     {
+        CreateMap<UserRegistrationDto, User>();
+        
         CreateMap<Genre, GenreDto>();
         CreateMap<Movie, MovieDto>();
         CreateMap<WatchEntry, WatchEntryDto>()

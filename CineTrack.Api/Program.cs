@@ -1,5 +1,5 @@
-using CineTrack.Api;
 using CineTrack.Api.Middlewares;
+using CineTrack.App;
 using CineTrack.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +10,13 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.RegisterServices(builder.Configuration);
+
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 var app = builder.Build();
 
@@ -23,7 +28,7 @@ app.UseHttpsRedirection();
 
 app.UseErrorHandlingMiddleware();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
