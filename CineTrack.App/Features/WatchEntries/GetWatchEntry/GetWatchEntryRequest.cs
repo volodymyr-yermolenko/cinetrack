@@ -1,5 +1,5 @@
-using CineTrack.App.Models;
 using MediatR;
+using CineTrack.App.Models.WatchEntries;
 
 namespace CineTrack.App.Features.WatchEntries.GetWatchEntry;
 

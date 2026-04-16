@@ -1,7 +1,7 @@
 using CineTrack.App.Interfaces;
 using CineTrack.Domain.Enums;
 
-namespace CineTrack.App.Models;
+namespace CineTrack.App.Models.WatchEntries;
 
 public class CreateWatchEntryDto : IWatchEntryAttributes
 {

@@ -1,5 +1,8 @@
 using AutoMapper;
-using CineTrack.App.Models;
+using CineTrack.App.Models.Movies;
+using CineTrack.App.Models.WatchEntries;
+using CineTrack.App.Models.Genres;
+using CineTrack.App.Models.Users;
 using CineTrack.Domain.Entities;
 
 namespace CineTrack.App.Mapping;

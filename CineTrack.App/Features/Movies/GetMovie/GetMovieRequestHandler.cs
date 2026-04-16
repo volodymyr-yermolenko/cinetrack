@@ -3,7 +3,7 @@ using MediatR;
 using CineTrack.App.Common.Constants;
 using CineTrack.App.Common.Exceptions;
 using CineTrack.App.Interfaces;
-using CineTrack.App.Models;
+using CineTrack.App.Models.Movies;
 
 namespace CineTrack.App.Features.Movies.GetMovie;
 

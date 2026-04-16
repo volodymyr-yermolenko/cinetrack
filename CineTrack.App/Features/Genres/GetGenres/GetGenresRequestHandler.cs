@@ -1,7 +1,7 @@
 using AutoMapper;
-using CineTrack.App.Interfaces;
-using CineTrack.App.Models;
 using MediatR;
+using CineTrack.App.Interfaces;
+using CineTrack.App.Models.Genres;
 
 namespace CineTrack.App.Features.Genres.GetGenres;
 

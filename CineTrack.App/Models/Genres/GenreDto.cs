@@ -1,4 +1,4 @@
-namespace CineTrack.App.Models;
+namespace CineTrack.App.Models.Genres;
 
 public class GenreDto
 {

@@ -1,5 +1,5 @@
 using MediatR;
-using CineTrack.App.Models;
+using CineTrack.App.Models.Users;
 
 namespace CineTrack.App.Features.Users.ConfirmEmail;
 

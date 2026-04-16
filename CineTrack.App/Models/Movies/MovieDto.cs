@@ -1,6 +1,7 @@
+using CineTrack.App.Models.Genres;
 using CineTrack.Domain.Enums;
 
-namespace CineTrack.App.Models;
+namespace CineTrack.App.Models.Movies;
 
 public class MovieDto
 {

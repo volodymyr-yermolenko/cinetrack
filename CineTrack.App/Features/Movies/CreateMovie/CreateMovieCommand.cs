@@ -1,4 +1,4 @@
-using CineTrack.App.Models;
+using CineTrack.App.Models.Movies;
 using MediatR;
 
 namespace CineTrack.App.Features.Movies.CreateMovie;

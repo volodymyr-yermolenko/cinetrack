@@ -1,12 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
 using CineTrack.App.Features.Movies.CreateMovie;
 using CineTrack.App.Features.Movies.DeleteMovie;
 using CineTrack.App.Features.Movies.GetMovie;
 using CineTrack.App.Features.Movies.GetMovies;
 using CineTrack.App.Features.Movies.UpdateMovie;
-using CineTrack.App.Models;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using CineTrack.App.Models.Movies;
 
 namespace CineTrack.Api.Controllers;
 

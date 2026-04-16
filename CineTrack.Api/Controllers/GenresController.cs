@@ -1,7 +1,7 @@
-using CineTrack.App.Features.Genres.GetGenres;
-using CineTrack.App.Models;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using CineTrack.App.Features.Genres.GetGenres;
+using CineTrack.App.Models.Genres;
 
 namespace CineTrack.Api.Controllers;
 

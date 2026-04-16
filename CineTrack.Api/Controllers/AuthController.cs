@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using CineTrack.App.Features.Users.ConfirmEmail;
 using CineTrack.App.Features.Users.RegisterUser;
-using CineTrack.App.Models;
+using CineTrack.App.Models.Users;
 
 namespace CineTrack.Api.Controllers;
 

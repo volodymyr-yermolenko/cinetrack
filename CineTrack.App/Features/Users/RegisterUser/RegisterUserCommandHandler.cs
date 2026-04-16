@@ -1,10 +1,10 @@
+using Microsoft.Extensions.Logging;
 using AutoMapper;
 using MediatR;
 using CineTrack.App.Common.Exceptions;
 using CineTrack.App.Common.Helpers;
-using Microsoft.Extensions.Logging;
 using CineTrack.App.Interfaces;
-using CineTrack.App.Models;
+using CineTrack.App.Models.Users;
 using CineTrack.Domain.Entities;
 
 namespace CineTrack.App.Features.Users.RegisterUser;

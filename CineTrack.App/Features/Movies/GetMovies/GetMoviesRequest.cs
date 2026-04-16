@@ -1,6 +1,5 @@
-using CineTrack.App.Models;
-using CineTrack.Domain.Entities;
 using MediatR;
+using CineTrack.App.Models.Movies;
 
 namespace CineTrack.App.Features.Movies.GetMovies;
 

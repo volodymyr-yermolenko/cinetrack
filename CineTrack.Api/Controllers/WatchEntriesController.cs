@@ -1,11 +1,11 @@
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
 using CineTrack.App.Features.WatchEntries.CreateWatchEntry;
 using CineTrack.App.Features.WatchEntries.DeleteWatchEntry;
 using CineTrack.App.Features.WatchEntries.GetWatchEntries;
 using CineTrack.App.Features.WatchEntries.GetWatchEntry;
 using CineTrack.App.Features.WatchEntries.UpdateWatchEntry;
-using CineTrack.App.Models;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+using CineTrack.App.Models.WatchEntries;
 
 namespace CineTrack.Api.Controllers;
 
