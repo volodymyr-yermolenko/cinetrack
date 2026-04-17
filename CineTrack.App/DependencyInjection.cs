@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using CineTrack.App.Features.Movies.Validators;
 using CineTrack.App.Features.WatchEntries.Validators;
+using CineTrack.App.Services;
 
 namespace CineTrack.App;
 
@@ -14,6 +15,7 @@ public static class DependencyInjection
 
         services.AddScoped<MovieCommandValidator>();
         services.AddScoped<WatchEntryCommandValidator>();
+        services.AddScoped<EmailConfirmationService>();
 
         return services;
     }

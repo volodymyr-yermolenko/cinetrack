@@ -10,6 +10,7 @@ using CineTrack.Infrastructure.Settings;
 using CineTrack.Infrastructure.Persistence;
 using CineTrack.Infrastructure.Repositories;
 using CineTrack.Infrastructure.Services;
+using CineTrack.App.Common.Settings;
 
 namespace CineTrack.Infrastructure;
 
@@ -21,6 +22,11 @@ public static class DependencyInjection
         
         services.AddOptions<EmailSettings>()
             .Bind(configuration.GetSection("EmailSettings"))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
+        services.AddOptions<WebSiteSettings>()
+            .Bind(configuration.GetSection("WebSiteSettings"))
             .ValidateDataAnnotations()
             .ValidateOnStart();
         
@@ -43,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<IWatchEntryRepository, WatchEntryRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMailSender, MailSender>();
+        services.AddScoped<ITokenService, JwtTokenService>();
         
         return services;
     }    

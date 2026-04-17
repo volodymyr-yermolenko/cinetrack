@@ -1,6 +1,6 @@
-namespace CineTrack.App.Models.Users;
+namespace CineTrack.App.Models.Authentication;
 
-public class UserRegistrationDto
+public class RegistrationDto
 {
     public required string Email { get; init; }
     public required string Name { get; init; }

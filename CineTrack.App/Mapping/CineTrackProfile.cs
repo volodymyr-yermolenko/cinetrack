@@ -2,7 +2,7 @@ using AutoMapper;
 using CineTrack.App.Models.Movies;
 using CineTrack.App.Models.WatchEntries;
 using CineTrack.App.Models.Genres;
-using CineTrack.App.Models.Users;
+using CineTrack.App.Models.Authentication;
 using CineTrack.Domain.Entities;
 
 namespace CineTrack.App.Mapping;
@@ -11,7 +11,7 @@ public class CineTrackProfile : Profile
 {
     public CineTrackProfile()
     {
-        CreateMap<UserRegistrationDto, User>();
+        CreateMap<RegistrationDto, User>();
         
         CreateMap<Genre, GenreDto>();
         CreateMap<Movie, MovieDto>();

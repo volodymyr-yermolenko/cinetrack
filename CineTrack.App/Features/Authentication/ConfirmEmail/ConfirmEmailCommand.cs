@@ -1,7 +1,7 @@
 using MediatR;
-using CineTrack.App.Models.Users;
+using CineTrack.App.Models.Authentication;
 
-namespace CineTrack.App.Features.Users.ConfirmEmail;
+namespace CineTrack.App.Features.Authentication.ConfirmEmail;
 
 public class ConfirmEmailCommand(Guid emailConfirmationToken) : IRequest<EmailConfirmationResult>
 {

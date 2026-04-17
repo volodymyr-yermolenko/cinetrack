@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using CineTrack.App.Features.Users.ConfirmEmail;
-using CineTrack.App.Features.Users.RegisterUser;
-using CineTrack.App.Models.Users;
+using CineTrack.App.Features.Authentication.ConfirmEmail;
+using CineTrack.App.Features.Authentication.LoginUser;
+using CineTrack.App.Features.Authentication.RegisterUser;
+using CineTrack.App.Features.Authentication.ResendConfirmation;
+using CineTrack.App.Models.Authentication;
 
 namespace CineTrack.Api.Controllers;
 
@@ -11,8 +13,8 @@ namespace CineTrack.Api.Controllers;
 public class AuthController(IMediator mediator) : ControllerBase
 {
     [HttpPost("register")]
-    [ProducesResponseType(typeof(RegistrationResult), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Register([FromBody] UserRegistrationDto registrationData)
+    [ProducesResponseType(typeof(RegistrationResponseDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Register([FromBody] RegistrationDto registrationData)
     {
         var command = new RegisterUserCommand(registrationData);
         var result = await mediator.Send(command);
@@ -32,15 +34,22 @@ public class AuthController(IMediator mediator) : ControllerBase
     
     
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] UserLoginDto login)
+    [ProducesResponseType(typeof(LoginResponseDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Login([FromBody] LoginDto loginData)
     {
-        if (login is { Email: "test", Password: "test" })
-        {
-            //var accessToken = tokenService.GenerateAccessToken(login.Email);
-            var accessToken = "";
-            return Ok(new { AccessToken = accessToken });
-        }
+        var command = new LoginUserCommand(loginData);
+        var result = await mediator.Send(command);
+        
+        return Ok(result);
+    }
+    
+    [HttpPost("resend-confirmation")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> ResendConfirmation([FromBody] ResendConfirmationDto resendConfirmationData)
+    {
+        var command = new ResendConfirmationCommand(resendConfirmationData);
+        await mediator.Send(command);
 
-        return Unauthorized("Invalid credentials");
+        return NoContent();
     }
 }

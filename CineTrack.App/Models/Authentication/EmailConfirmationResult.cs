@@ -1,4 +1,4 @@
-namespace CineTrack.App.Models.Users;
+namespace CineTrack.App.Models.Authentication;
 
 public enum EmailConfirmationResult
 {
