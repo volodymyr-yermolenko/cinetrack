@@ -3,9 +3,9 @@ using CineTrack.App.Models.Movies;
 
 namespace CineTrack.App.Features.Movies.UpdateMovie;
 
-public class UpdateMovieCommand(int userId) : IRequest<Unit>
+public class UpdateMovieCommand(int userId, int movieId, UpdateMovieDto movie) : IRequest<Unit>
 {
     public int UserId { get; } = userId;
-    public required int MovieId { get; init; }
-    public required UpdateMovieDto Movie { get; init; }
+    public int MovieId { get; } = movieId;
+    public UpdateMovieDto Movie { get; } = movie;
 }

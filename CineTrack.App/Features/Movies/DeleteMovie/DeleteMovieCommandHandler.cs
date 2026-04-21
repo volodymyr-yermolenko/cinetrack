@@ -13,7 +13,7 @@ public class DeleteMovieCommandHandler(IMovieRepository repository)
         var movie = await repository.GetMovieAsync(request.UserId, request.MovieId);
         if (movie == null)
         {
-            throw new AppNotFoundException(ErrorMessages.MovieNotFound);
+            throw new AppNotFoundException(MovieErrorMessages.MovieNotFound);
         }
         
         repository.DeleteMovie(movie);

@@ -5,7 +5,7 @@ namespace CineTrack.App.Models.Movies;
 
 public class CreateMovieDto : IMovieAttributes
 {
-    public required string Title { get; init; }
+    public string Title { get; set; } = string.Empty;
     public int ReleaseYear { get; init; }
     public MovieType MovieType { get; init; }
     public string? ImageUrl { get; init; }

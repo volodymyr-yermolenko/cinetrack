@@ -17,6 +17,7 @@ public class ErrorHandlingMiddleware(RequestDelegate next)
                 AppValidationException => StatusCodes.Status400BadRequest,
                 AppNotFoundException => StatusCodes.Status404NotFound,
                 AppForbiddenException => StatusCodes.Status403Forbidden,
+                UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                 _ => StatusCodes.Status500InternalServerError
             };
             

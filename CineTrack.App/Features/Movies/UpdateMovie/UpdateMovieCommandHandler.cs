@@ -22,7 +22,7 @@ public class UpdateMovieCommandHandler(
         var movie = await repository.GetMovieAsync(command.UserId, command.MovieId);
         if (movie == null)
         {
-            throw new AppNotFoundException(ErrorMessages.MovieNotFound);
+            throw new AppNotFoundException(MovieErrorMessages.MovieNotFound);
         }
         
         var genres = await genreRepository.GetGenresByIdsAsync(movieDto.GenreIds);

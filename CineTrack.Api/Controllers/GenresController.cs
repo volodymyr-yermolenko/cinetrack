@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using MediatR;
 using CineTrack.App.Features.Genres.GetGenres;
 using CineTrack.App.Models.Genres;
@@ -6,8 +7,9 @@ using CineTrack.App.Models.Genres;
 namespace CineTrack.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/genres")]
-public class GenresController(IMediator mediator): ControllerBase
+public class GenresController(IMediator mediator): BaseController
 {
     [HttpGet("")]
     [ProducesResponseType(typeof(List<GenreDto>), StatusCodes.Status200OK)]

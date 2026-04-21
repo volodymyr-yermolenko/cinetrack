@@ -15,7 +15,7 @@ public class GetWatchEntryRequestHandler(IWatchEntryRepository repository, IMapp
         var entry = await repository.GetWatchEntryAsync(request.UserId, request.WatchEntryId);
         if (entry == null)
         {
-            throw new AppNotFoundException(ErrorMessages.WatchEntryNotFound);
+            throw new AppNotFoundException(WatchEntryErrorMessages.WatchEntryNotFound);
         }
         
         return mapper.Map<WatchEntryDto>(entry);

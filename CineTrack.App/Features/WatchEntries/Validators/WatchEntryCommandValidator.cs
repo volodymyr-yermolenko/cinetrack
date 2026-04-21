@@ -11,7 +11,7 @@ public class WatchEntryCommandValidator(IWatchEntryRepository repository, IMovie
     {
         if (await repository.WatchEntryExistsAsync(userId, watchEntry.MovieId, watchEntry.WatchedDate)) 
         {
-            throw new AppValidationException(ErrorMessages.DuplicateWatchEntry);
+            throw new AppValidationException(WatchEntryErrorMessages.DuplicateWatchEntry);
         }
         await ValidateWatchEntryAsync(userId, watchEntry);
     }
@@ -20,7 +20,7 @@ public class WatchEntryCommandValidator(IWatchEntryRepository repository, IMovie
     {
         if (await repository.WatchEntryExistsAsync(userId, watchEntry.MovieId, watchEntry.WatchedDate, watchEntryId)) 
         {
-            throw new AppValidationException(ErrorMessages.DuplicateWatchEntry);
+            throw new AppValidationException(WatchEntryErrorMessages.DuplicateWatchEntry);
         }
         await ValidateWatchEntryAsync(userId, watchEntry);
     }
@@ -30,23 +30,23 @@ public class WatchEntryCommandValidator(IWatchEntryRepository repository, IMovie
         var movie = await movieRepository.GetMovieAsync(userId, watchEntry.MovieId);
         if (movie == null)
         {
-            throw new AppValidationException(ErrorMessages.MovieNotFound);
+            throw new AppValidationException(MovieErrorMessages.MovieNotFound);
         }
         if (!watchEntry.ViewingContext.IsValidEnum())
         {
-            throw new AppValidationException(ErrorMessages.InvalidViewingContext);
+            throw new AppValidationException(WatchEntryErrorMessages.InvalidViewingContext);
         }
         if (watchEntry.WatchedDate > DateTime.UtcNow) 
         {
-            throw new  AppValidationException(ErrorMessages.WatchedDateInFuture);
+            throw new  AppValidationException(WatchEntryErrorMessages.WatchedDateInFuture);
         }
         if (watchEntry.WatchedDate.Year < movie.ReleaseYear) 
         {
-            throw new AppValidationException(ErrorMessages.WatchedDateBeforeRelease);
+            throw new AppValidationException(WatchEntryErrorMessages.WatchedDateBeforeRelease);
         }
         if (watchEntry.Rating is < 1 or > 10) 
         {
-            throw new AppValidationException(ErrorMessages.InvalidRating);
+            throw new AppValidationException(WatchEntryErrorMessages.InvalidRating);
         }
     }    
 }

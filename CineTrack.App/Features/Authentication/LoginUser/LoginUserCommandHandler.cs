@@ -1,4 +1,6 @@
 using MediatR;
+using CineTrack.App.Common.Constants;
+using CineTrack.App.Common.Exceptions;
 using CineTrack.App.Common.Helpers;
 using CineTrack.App.Interfaces;
 using CineTrack.App.Models.Authentication;
@@ -15,6 +17,12 @@ public class LoginUserCommandHandler(
         var result = new LoginResponseDto();
         var loginData = command.LoginData;
         
+        ValidationHelper.ValidateEmail(loginData.Email);
+        if (string.IsNullOrWhiteSpace(loginData.Password))
+        {
+            throw new AppValidationException(AuthErrorMessages.PasswordRequired);
+        }
+
         var user = await userRepository.GetByEmailAsync(loginData.Email);
         if (user == null || !PasswordHelper.VerifyHashedPassword(loginData.Password, user.PasswordHash))
         {

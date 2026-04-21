@@ -18,7 +18,7 @@ public class UpdateWatchEntryCommandHandler(IWatchEntryRepository repository, IM
         var watchEntry = await repository.GetWatchEntryAsync(command.UserId, command.WatchEntryId);
         if (watchEntry == null)
         {
-            throw new AppNotFoundException(ErrorMessages.WatchEntryNotFound);
+            throw new AppNotFoundException(WatchEntryErrorMessages.WatchEntryNotFound);
         }
         
         mapper.Map(watchEntryDto, watchEntry);

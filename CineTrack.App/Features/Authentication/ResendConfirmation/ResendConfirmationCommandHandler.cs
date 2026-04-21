@@ -19,13 +19,13 @@ namespace CineTrack.App.Features.Authentication.ResendConfirmation
             if (user == null) 
                 return Unit.Value;
             
-            emailConfirmationService.GenerateEmailConfirmationToken(user);
+            emailConfirmationService.GenerateConfirmationToken(user);
             user.UpdatedAt = DateTime.UtcNow;
             
             userRepository.UpdateUser(user);
             await userRepository.UnitOfWork.SaveChangesAsync();
                 
-            await emailConfirmationService.SendEmailConfirmationAsync(user);
+            await emailConfirmationService.SendConfirmationEmailAsync(user);
             return Unit.Value;
         }
     }

@@ -3,9 +3,9 @@ using CineTrack.App.Models.WatchEntries;
 
 namespace CineTrack.App.Features.WatchEntries.UpdateWatchEntry;
 
-public class UpdateWatchEntryCommand(int userId) : IRequest<Unit>
+public class UpdateWatchEntryCommand(int userId, int watchEntryId, UpdateWatchEntryDto watchEntry) : IRequest<Unit>
 {
     public int UserId { get; } = userId;
-    public required int WatchEntryId { get; init; }
-    public required UpdateWatchEntryDto WatchEntry { get; init; }
+    public int WatchEntryId { get; } = watchEntryId;
+    public UpdateWatchEntryDto WatchEntry { get; } = watchEntry;
 }

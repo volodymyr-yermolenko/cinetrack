@@ -3,7 +3,8 @@ using CineTrack.App.Models.Authentication;
 
 namespace CineTrack.App.Features.Authentication.ConfirmEmail;
 
-public class ConfirmEmailCommand(Guid emailConfirmationToken) : IRequest<EmailConfirmationResult>
+public class ConfirmEmailCommand(EmailConfirmationDto emailConfirmationData) 
+    : IRequest<EmailConfirmationResponseDto>
 {
-    public Guid EmailConfirmationToken { get; } = emailConfirmationToken;
+    public EmailConfirmationDto EmailConfirmationData { get; } = emailConfirmationData;
 }

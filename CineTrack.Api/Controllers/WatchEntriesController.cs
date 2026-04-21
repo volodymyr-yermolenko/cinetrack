@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using CineTrack.App.Features.WatchEntries.CreateWatchEntry;
@@ -10,16 +11,15 @@ using CineTrack.App.Models.WatchEntries;
 namespace CineTrack.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/watch-entries")]
-public class WatchEntriesController(IMediator mediator) : ControllerBase
+public class WatchEntriesController(IMediator mediator) : BaseController
 {
-    private const int DevUserId = 1;
-    
     [HttpGet("")]
     [ProducesResponseType(typeof(List<WatchEntryDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetWatchEntries([FromQuery] int? genreId, [FromQuery] string? search)
     {
-        var request = new GetWatchEntriesRequest(DevUserId) { GenreId = genreId, SearchString = search };
+        var request = new GetWatchEntriesRequest(UserId) { GenreId = genreId, SearchString = search };
         var result = await mediator.Send(request);
         return Ok(result);
     }
@@ -28,7 +28,7 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(WatchEntryDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetWatchEntry([FromRoute] int id)
     {
-        var request = new GetWatchEntryRequest(DevUserId) { WatchEntryId = id };
+        var request = new GetWatchEntryRequest(UserId, id);
         var result = await mediator.Send(request);
         return Ok(result);
     }
@@ -37,7 +37,7 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateWatchEntry([FromBody] CreateWatchEntryDto watchEntry)
     {
-        var command = new CreateWatchEntryCommand(DevUserId) { WatchEntry = watchEntry };
+        var command = new CreateWatchEntryCommand(UserId, watchEntry);
         var result = await mediator.Send(command);
         return CreatedAtAction(nameof(GetWatchEntry), new { id = result }, result);
     }
@@ -46,7 +46,7 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> UpdateWatchEntry([FromRoute] int id, [FromBody] UpdateWatchEntryDto watchEntry)
     {
-        var command = new UpdateWatchEntryCommand(DevUserId) { WatchEntryId = id, WatchEntry = watchEntry };
+        var command = new UpdateWatchEntryCommand(UserId, id, watchEntry);
         await mediator.Send(command);
         return NoContent();
     }
@@ -55,7 +55,7 @@ public class WatchEntriesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteWatchEntry([FromRoute] int id)
     {
-        var command = new DeleteWatchEntryCommand(DevUserId) { WatchEntryId = id };
+        var command = new DeleteWatchEntryCommand(UserId, id);
         await mediator.Send(command);
         return NoContent();
     }

@@ -23,15 +23,15 @@ public class EmailConfirmationService(
                          CineTrack Team
                          """;
     
-    public void GenerateEmailConfirmationToken(User user)
+    public void GenerateConfirmationToken(User user)
     {
-        var confirmationToken = Guid.NewGuid();
-        user.EmailConfirmationToken = confirmationToken;
+        var token = Guid.NewGuid();
+        user.EmailConfirmationToken = token;
         user.EmailConfirmationTokenExpiresAt = DateTime.UtcNow.AddHours(TokenExpirationHours);
         user.IsEmailConfirmed = false;
     }
 
-    public async Task SendEmailConfirmationAsync(User user)
+    public async Task SendConfirmationEmailAsync(User user)
     {
         var webSiteSettings = options.Value;
         var webSiteUrl = webSiteSettings.BaseUrl;

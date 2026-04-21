@@ -4,28 +4,40 @@ using CineTrack.App.Models.Authentication;
 
 namespace CineTrack.App.Features.Authentication.ConfirmEmail;
 
-public class ConfirmEmailCommandHandler(IUserRepository userRepository) : IRequestHandler<ConfirmEmailCommand, EmailConfirmationResult>
+public class ConfirmEmailCommandHandler(
+    IUserRepository userRepository, 
+    ITokenService tokenService) 
+    : IRequestHandler<ConfirmEmailCommand, EmailConfirmationResponseDto>
 {
-    public async Task<EmailConfirmationResult> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
+    public async Task<EmailConfirmationResponseDto> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByEmailConfirmationTokenAsync(request.EmailConfirmationToken);
+        var result = new EmailConfirmationResponseDto();
+        var confirmationData = request.EmailConfirmationData;
+        var user = await userRepository.GetByEmailConfirmationTokenAsync(confirmationData.EmailConfirmationToken);
         if (user == null)
         {
-            return EmailConfirmationResult.UserNotFound;
+            result.Result = EmailConfirmationResult.InvalidToken;
+            return result;
         }
         
         if (user.EmailConfirmationTokenExpiresAt < DateTime.UtcNow)
         {
-            return EmailConfirmationResult.TokenExpired;
+            result.Result = EmailConfirmationResult.TokenExpired;
+            result.Email = user.Email;
+            return result;
         }
         
         user.IsEmailConfirmed = true;
         user.EmailConfirmationToken = null;
         user.EmailConfirmationTokenExpiresAt = null;
+        user.UpdatedAt = DateTime.UtcNow;
         
         userRepository.UpdateUser(user);
         await userRepository.UnitOfWork.SaveChangesAsync();
-        
-        return EmailConfirmationResult.Success;
+
+        result.Result = EmailConfirmationResult.Success;
+        result.AccessToken = tokenService.GenerateAccessToken(user);
+
+        return result;
     }
 }

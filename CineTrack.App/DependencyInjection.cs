@@ -16,6 +16,7 @@ public static class DependencyInjection
         services.AddScoped<MovieCommandValidator>();
         services.AddScoped<WatchEntryCommandValidator>();
         services.AddScoped<EmailConfirmationService>();
+        services.AddScoped<PasswordResetService>();
 
         return services;
     }

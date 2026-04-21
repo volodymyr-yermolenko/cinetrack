@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using CineTrack.App.Common.Constants;
 using CineTrack.App.Common.Exceptions;
 using CineTrack.App.Common.Helpers;
 using CineTrack.App.Interfaces;
@@ -19,6 +20,7 @@ public class RegisterUserCommandHandler(
     {
         var result = new RegistrationResponseDto();
         var registrationData = request.RegistrationData;
+        registrationData.Name = registrationData.Name.Trim();
         ValidateRegistrationData(registrationData);
         
         var existingUser = await userRepository.GetByEmailAsync(registrationData.Email);
@@ -36,12 +38,12 @@ public class RegisterUserCommandHandler(
         user.CreatedAt = now;
         user.UpdatedAt = now;
         
-        emailConfirmationService.GenerateEmailConfirmationToken(user);
+        emailConfirmationService.GenerateConfirmationToken(user);
 
         await userRepository.AddUserAsync(user);
         await userRepository.UnitOfWork.SaveChangesAsync();
 
-        await emailConfirmationService.SendEmailConfirmationAsync(user);
+        await emailConfirmationService.SendConfirmationEmailAsync(user);
         
         result.Result = RegistrationResult.Success;
         return result;
@@ -51,7 +53,7 @@ public class RegisterUserCommandHandler(
     {
         if (string.IsNullOrWhiteSpace(registrationData.Name))
         {
-            throw new AppValidationException("Name is required");
+            throw new AppValidationException(AuthErrorMessages.UserNameRequired);
         }
         ValidationHelper.ValidateEmail(registrationData.Email);
         ValidationHelper.ValidatePassword(registrationData.Password);

@@ -13,7 +13,7 @@ public class DeleteWatchEntryCommandHandler(IWatchEntryRepository repository)
         var watchEntry = await repository.GetWatchEntryAsync(request.UserId, request.WatchEntryId);
         if (watchEntry == null)
         {
-            throw new AppNotFoundException(ErrorMessages.WatchEntryNotFound);
+            throw new AppNotFoundException(WatchEntryErrorMessages.WatchEntryNotFound);
         }
         
         repository.DeleteWatchEntry(watchEntry);

@@ -15,6 +15,7 @@ public class CreateMovieCommandHandler(
 {
     public async Task<int> Handle(CreateMovieCommand command, CancellationToken cancellationToken)
     {
+        command.Movie.Title = command.Movie.Title.Trim();
         await validator.ValidateMovieCreationAsync(command.UserId, command.Movie);
 
         var movieDto = command.Movie;
