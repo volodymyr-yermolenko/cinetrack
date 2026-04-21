@@ -12,7 +12,7 @@ using CineTrack.App.Models.Movies;
 namespace CineTrack.Api.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 [Route("api/movies")]
 public class MoviesController(IMediator mediator) : BaseController
 {

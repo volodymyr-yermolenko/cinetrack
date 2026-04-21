@@ -11,7 +11,7 @@ using CineTrack.App.Models.WatchEntries;
 namespace CineTrack.Api.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 [Route("api/watch-entries")]
 public class WatchEntriesController(IMediator mediator) : BaseController
 {

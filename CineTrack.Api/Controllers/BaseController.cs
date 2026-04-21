@@ -5,7 +5,7 @@ namespace CineTrack.Api.Controllers;
 
 public class BaseController : ControllerBase
 {
-    protected int UserId => GetUserId();
+    protected int UserId => 12; //GetUserId();
 
     private int GetUserId()
     {
