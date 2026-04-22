@@ -16,7 +16,7 @@ namespace CineTrack.App.Features.Authentication.ResendConfirmation
             ValidationHelper.ValidateEmail(email);
 
             var user = await userRepository.GetByEmailAsync(email);
-            if (user == null) 
+            if (user == null || user.IsEmailConfirmed) 
                 return Unit.Value;
             
             emailConfirmationService.GenerateConfirmationToken(user);
