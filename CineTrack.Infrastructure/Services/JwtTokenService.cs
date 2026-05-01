@@ -11,6 +11,7 @@ namespace CineTrack.Infrastructure.Services;
 
 public class JwtTokenService(IOptions<JwtSettings> options) : ITokenService
 {
+    private const int TokenExpirationMinutes = 30;
     private static readonly JwtSecurityTokenHandler Handler = new();
     
     public string? GenerateAccessToken(User user)
@@ -28,7 +29,7 @@ public class JwtTokenService(IOptions<JwtSettings> options) : ITokenService
             issuer: settings.Issuer,
             audience: settings.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(30),
+            expires: DateTime.UtcNow.AddMinutes(TokenExpirationMinutes),
             signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
         );
         

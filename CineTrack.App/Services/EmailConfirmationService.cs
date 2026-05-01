@@ -11,13 +11,13 @@ public class EmailConfirmationService(
     IOptions<WebSiteSettings> options, 
     ILogger<EmailConfirmationService> logger)
 {
-    private const int TokenExpirationHours = 1;
+    private const int TokenExpirationMinutes = 60;
     private const string EmailSubject = "CineTrack: Confirm registration";
     private const string EmailBodyTemplate = """
                          Thank you for your registration to the CineTrack website.
                          To finish the registration, please click on the link below:
                          {0}
-                         The link will expire in {1} hour(s).
+                         The link will expire in {1} minute(s).
 
                          Best regards,
                          CineTrack Team
@@ -27,7 +27,7 @@ public class EmailConfirmationService(
     {
         var token = Guid.NewGuid();
         user.EmailConfirmationToken = token;
-        user.EmailConfirmationTokenExpiresAt = DateTime.UtcNow.AddHours(TokenExpirationHours);
+        user.EmailConfirmationTokenExpiresAt = DateTime.UtcNow.AddMinutes(TokenExpirationMinutes);
         user.IsEmailConfirmed = false;
     }
 
@@ -38,7 +38,7 @@ public class EmailConfirmationService(
         var emailConfirmationPath = webSiteSettings.EmailConfirmationPath;
         
         var confirmationLink = $"{webSiteUrl}{emailConfirmationPath}?token={user.EmailConfirmationToken}";
-        var emailBody = string.Format(EmailBodyTemplate, confirmationLink, TokenExpirationHours);
+        var emailBody = string.Format(EmailBodyTemplate, confirmationLink, TokenExpirationMinutes);
         
         try
         {
