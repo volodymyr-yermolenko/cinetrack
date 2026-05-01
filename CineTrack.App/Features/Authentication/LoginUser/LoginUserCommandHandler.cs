@@ -26,17 +26,17 @@ public class LoginUserCommandHandler(
         var user = await userRepository.GetByEmailAsync(loginData.Email);
         if (user == null || !PasswordHelper.VerifyHashedPassword(loginData.Password, user.PasswordHash))
         {
-            result.Result = LoginResult.InvalidCredentials;
+            result.Status = LoginStatus.InvalidCredentials;
             return result;
         }
 
         if (!user.IsEmailConfirmed)
         {
-            result.Result = LoginResult.EmailNotConfirmed;
+            result.Status = LoginStatus.EmailNotConfirmed;
             return result;
         }
         
-        result.Result = LoginResult.Success;
+        result.Status = LoginStatus.Success;
         result.AccessToken = tokenService.GenerateAccessToken(user);
         return result;
     }

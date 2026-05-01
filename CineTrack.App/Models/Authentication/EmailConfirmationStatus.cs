@@ -1,6 +1,6 @@
 namespace CineTrack.App.Models.Authentication;
 
-public enum EmailConfirmationResult
+public enum EmailConfirmationStatus
 {
     Success = 0,
     InvalidToken = 1,

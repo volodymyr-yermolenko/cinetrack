@@ -12,7 +12,7 @@ using CineTrack.App.Models.Movies;
 namespace CineTrack.Api.Controllers;
 
 [ApiController]
-//[Authorize]
+[Authorize]
 [Route("api/movies")]
 public class MoviesController(IMediator mediator) : BaseController
 {
@@ -20,7 +20,6 @@ public class MoviesController(IMediator mediator) : BaseController
     [ProducesResponseType(typeof(List<MovieDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetMovies([FromQuery] int? genreId, [FromQuery] string? search)
     {
-        var d = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var request = new GetMoviesRequest(UserId) { GenreId = genreId, SearchString = search };
         var result = await mediator.Send(request);
         return Ok(result);

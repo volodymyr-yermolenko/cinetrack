@@ -16,13 +16,13 @@ public class ConfirmEmailCommandHandler(
         var user = await userRepository.GetByEmailConfirmationTokenAsync(confirmationData.EmailConfirmationToken);
         if (user == null)
         {
-            result.Result = EmailConfirmationResult.InvalidToken;
+            result.Status = EmailConfirmationStatus.InvalidToken;
             return result;
         }
         
         if (user.EmailConfirmationTokenExpiresAt < DateTime.UtcNow)
         {
-            result.Result = EmailConfirmationResult.TokenExpired;
+            result.Status = EmailConfirmationStatus.TokenExpired;
             result.Email = user.Email;
             return result;
         }
@@ -35,7 +35,7 @@ public class ConfirmEmailCommandHandler(
         userRepository.UpdateUser(user);
         await userRepository.UnitOfWork.SaveChangesAsync();
 
-        result.Result = EmailConfirmationResult.Success;
+        result.Status = EmailConfirmationStatus.Success;
         result.AccessToken = tokenService.GenerateAccessToken(user);
 
         return result;

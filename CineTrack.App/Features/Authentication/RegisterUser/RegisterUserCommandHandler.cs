@@ -26,9 +26,9 @@ public class RegisterUserCommandHandler(
         var existingUser = await userRepository.GetByEmailAsync(registrationData.Email);
         if (existingUser != null)
         {
-            result.Result = existingUser.IsEmailConfirmed 
-                ? RegistrationResult.UserExists 
-                : RegistrationResult.UserNotConfirmed;
+            result.Status = existingUser.IsEmailConfirmed 
+                ? RegistrationStatus.UserExists 
+                : RegistrationStatus.UserNotConfirmed;
             return result;
         }
         
@@ -45,7 +45,7 @@ public class RegisterUserCommandHandler(
 
         await emailConfirmationService.SendConfirmationEmailAsync(user);
         
-        result.Result = RegistrationResult.Success;
+        result.Status = RegistrationStatus.Success;
         return result;
     }
 

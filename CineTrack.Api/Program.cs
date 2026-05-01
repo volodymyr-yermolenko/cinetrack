@@ -27,6 +27,16 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseErrorHandlingMiddleware();
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+    if (response is { StatusCode: StatusCodes.Status401Unauthorized, HasStarted: false })
+    {
+        response.ContentType = "application/json";
+        await response.WriteAsJsonAsync(new { error = "Unauthorized access" });
+    }
+});
+
 
 app.UseAuthentication();
 app.UseAuthorization();

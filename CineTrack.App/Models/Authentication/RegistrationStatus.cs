@@ -1,6 +1,6 @@
 namespace CineTrack.App.Models.Authentication;
 
-public enum RegistrationResult
+public enum RegistrationStatus
 {
     Success = 0,
     UserExists = 1,

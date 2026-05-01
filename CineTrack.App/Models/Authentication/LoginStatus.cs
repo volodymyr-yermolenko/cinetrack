@@ -1,6 +1,6 @@
 namespace CineTrack.App.Models.Authentication;
 
-public enum LoginResult
+public enum LoginStatus
 {
     Success = 0,
     InvalidCredentials = 1,
