@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using CineTrack.App.Features.Authentication.ConfirmEmail;
 using CineTrack.App.Features.Authentication.ForgotPassword;
+using CineTrack.App.Features.Authentication.GetCurrentUser;
 using CineTrack.App.Features.Authentication.LoginUser;
 using CineTrack.App.Features.Authentication.RegisterUser;
 using CineTrack.App.Features.Authentication.ResendConfirmation;
 using CineTrack.App.Features.Authentication.ResetPassword;
 using CineTrack.App.Models.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CineTrack.Api.Controllers;
 
@@ -73,4 +75,16 @@ public class AuthController(IMediator mediator) : BaseController
 
         return NoContent();
     }
+    
+    [HttpGet("current-user")]
+    [Authorize]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetCurrentUser()
+    {
+        var request = new GetCurrentUserRequest(UserId);
+        var result = await mediator.Send(request);
+        
+        return Ok(result);
+    }
+    
 }

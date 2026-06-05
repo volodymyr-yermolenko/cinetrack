@@ -17,7 +17,7 @@ public class CineTrackProfile : Profile
         CreateMap<Movie, MovieDto>();
         CreateMap<WatchEntry, WatchEntryDto>()
             .ForMember(dest => dest.Movie, opt => opt.MapFrom(src => src.Movie));
-        
+        CreateMap<User, UserDto>();
         
         CreateMap<CreateMovieDto, Movie>()
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Trim()));

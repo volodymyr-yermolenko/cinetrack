@@ -31,4 +31,5 @@ public static class AuthErrorMessages
     public const string PasswordContainsOuterSpaces = "Password cannot start or end with spaces";
     public const string InvalidPassword = "Password must be at least 8 characters long and contain uppercase, lowercase letters, and numbers";
     public const string UserNameRequired = "User name is required";
+    public const string UserNotFound = "User with provided ID is not found";
 }
