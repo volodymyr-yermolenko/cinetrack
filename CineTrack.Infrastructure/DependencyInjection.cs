@@ -50,14 +50,16 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMailSender, MailSender>();
         services.AddScoped<ITokenService, JwtTokenService>();
+        services.AddScoped<IEmailConfirmationService, EmailConfirmationService>();
+        services.AddScoped<IPasswordResetService, PasswordResetService>();
         
         return services;
     }    
     
     private static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOptions<JwtSettings>()
-            .Bind(configuration.GetSection("JwtSettings"))
+        services.AddOptions<AuthSettings>()
+            .Bind(configuration.GetSection("AuthSettings"))
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
@@ -65,9 +67,9 @@ public static class DependencyInjection
             .AddJwtBearer();
 
         services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
-            .Configure<IOptions<JwtSettings>>((options, jwtSettings) =>
+            .Configure<IOptions<AuthSettings>>((options, authSettings) =>
             {
-                var settings = jwtSettings.Value;
+                var settings = authSettings.Value;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

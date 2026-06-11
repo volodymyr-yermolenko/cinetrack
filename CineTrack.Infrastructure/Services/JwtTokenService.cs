@@ -9,9 +9,8 @@ using CineTrack.Infrastructure.Settings;
 
 namespace CineTrack.Infrastructure.Services;
 
-public class JwtTokenService(IOptions<JwtSettings> options) : ITokenService
+public class JwtTokenService(IOptions<AuthSettings> options) : ITokenService
 {
-    private const int TokenExpirationMinutes = 1;
     private static readonly JwtSecurityTokenHandler Handler = new();
     
     public string? GenerateAccessToken(User user)
@@ -29,7 +28,7 @@ public class JwtTokenService(IOptions<JwtSettings> options) : ITokenService
             issuer: settings.Issuer,
             audience: settings.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(TokenExpirationMinutes),
+            expires: DateTime.UtcNow.AddMinutes(settings.JwtTokenExpirationMinutes),
             signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
         );
         

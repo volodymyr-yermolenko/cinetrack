@@ -3,15 +3,16 @@ using Microsoft.Extensions.Options;
 using CineTrack.App.Common.Settings;
 using CineTrack.App.Interfaces;
 using CineTrack.Domain.Entities;
+using CineTrack.Infrastructure.Settings;
 
-namespace CineTrack.App.Services;
+namespace CineTrack.Infrastructure.Services;
 
 public class PasswordResetService(
     IMailSender mailSender, 
-    IOptions<WebSiteSettings> options, 
-    ILogger<PasswordResetService> logger)
+    IOptions<WebSiteSettings> webSiteOptions, 
+    IOptions<AuthSettings> authOptions,
+    ILogger<PasswordResetService> logger) : IPasswordResetService
 {
-    private const int TokenExpirationMinutes = 15;
     private const string EmailSubject = "CineTrack: Reset password";
     private const string EmailBodyTemplate = """
                                              You have requested to reset your password for the CineTrack website.
@@ -25,19 +26,21 @@ public class PasswordResetService(
     
     public void GenerateResetToken(User user)
     {
+        var authSettings = authOptions.Value;
         var token = Guid.NewGuid();
         user.PasswordResetToken = token;
-        user.PasswordResetTokenExpiresAt = DateTime.UtcNow.AddMinutes(TokenExpirationMinutes);
+        user.PasswordResetTokenExpiresAt = DateTime.UtcNow.AddMinutes(authSettings.ResetPasswordTokenExpirationMinutes);
     }
 
     public async Task SendResetEmailAsync(User user)
     {
-        var webSiteSettings = options.Value;
+        var webSiteSettings = webSiteOptions.Value;
+        var authSettings = authOptions.Value;
         var webSiteUrl = webSiteSettings.BaseUrl;
         var passwordResetPath = webSiteSettings.PasswordResetPath;
         
         var resetLink = $"{webSiteUrl}{passwordResetPath}?token={user.PasswordResetToken}";
-        var emailBody = string.Format(EmailBodyTemplate, resetLink, TokenExpirationMinutes);
+        var emailBody = string.Format(EmailBodyTemplate, resetLink, authSettings.ResetPasswordTokenExpirationMinutes);
         
         try
         {

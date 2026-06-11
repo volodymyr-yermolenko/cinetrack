@@ -1,13 +1,12 @@
 using MediatR;
 using CineTrack.App.Common.Helpers;
 using CineTrack.App.Interfaces;
-using CineTrack.App.Services;
 
 namespace CineTrack.App.Features.Authentication.ResendConfirmation
 {
     public class ResendConfirmationCommandHandler(
         IUserRepository userRepository, 
-        EmailConfirmationService emailConfirmationService) 
+        IEmailConfirmationService emailConfirmationService) 
         : IRequestHandler<ResendConfirmationCommand, Unit>
     {
         public async Task<Unit> Handle(ResendConfirmationCommand command, CancellationToken cancellationToken)

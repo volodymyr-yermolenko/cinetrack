@@ -5,7 +5,6 @@ using CineTrack.App.Common.Exceptions;
 using CineTrack.App.Common.Helpers;
 using CineTrack.App.Interfaces;
 using CineTrack.App.Models.Authentication;
-using CineTrack.App.Services;
 using CineTrack.Domain.Entities;
 
 namespace CineTrack.App.Features.Authentication.RegisterUser;
@@ -13,7 +12,7 @@ namespace CineTrack.App.Features.Authentication.RegisterUser;
 public class RegisterUserCommandHandler(
     IMapper mapper, 
     IUserRepository userRepository,
-    EmailConfirmationService emailConfirmationService)
+    IEmailConfirmationService emailConfirmationService)
     : IRequestHandler<RegisterUserCommand, RegistrationResponseDto>
 {
     public async Task<RegistrationResponseDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
