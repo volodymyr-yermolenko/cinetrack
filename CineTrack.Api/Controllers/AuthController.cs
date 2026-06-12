@@ -7,6 +7,7 @@ using CineTrack.App.Features.Authentication.LoginUser;
 using CineTrack.App.Features.Authentication.RegisterUser;
 using CineTrack.App.Features.Authentication.ResendConfirmation;
 using CineTrack.App.Features.Authentication.ResetPassword;
+using CineTrack.App.Features.Authentication.VerifyResetPassword;
 using CineTrack.App.Models.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
@@ -65,15 +66,25 @@ public class AuthController(IMediator mediator) : BaseController
 
         return NoContent();
     }
+
+    [HttpPost("verify-reset-password")]
+    [ProducesResponseType(typeof(VerifyResetPasswordResponseDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> VerifyResetPassword([FromBody] VerifyResetPasswordDto verifyResetPasswordData)
+    {
+        var command = new VerifyResetPasswordCommand(verifyResetPasswordData);
+        var result = await mediator.Send(command);
+
+        return Ok(result);
+    }
     
     [HttpPost("reset-password")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResetPasswordResponseDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordData)
     {
         var command = new ResetPasswordCommand(resetPasswordData);
-        await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NoContent();
+        return Ok(result);
     }
     
     [HttpGet("current-user")]

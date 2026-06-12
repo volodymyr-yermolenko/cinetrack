@@ -1,21 +1,33 @@
 using MediatR;
 using CineTrack.App.Common.Helpers;
 using CineTrack.App.Interfaces;
+using CineTrack.App.Models.Authentication;
 
 namespace CineTrack.App.Features.Authentication.ResetPassword;
 
-public class ResetPasswordCommandHandler(IUserRepository userRepository) 
-    : IRequestHandler<ResetPasswordCommand, Unit>
+public class ResetPasswordCommandHandler(
+    IUserRepository userRepository,
+    ITokenService tokenService) 
+    : IRequestHandler<ResetPasswordCommand, ResetPasswordResponseDto>
 {
-    public async Task<Unit> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+    public async Task<ResetPasswordResponseDto> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
     {
+        var result = new ResetPasswordResponseDto();
+        
         var resetPasswordData = request.ResetPasswordData;
         ValidationHelper.ValidatePassword(resetPasswordData.NewPassword);
 
         var user = await userRepository.GetByPasswordResetTokenAsync(resetPasswordData.ResetPasswordToken);
         if (user == null)
         {
-            return Unit.Value;
+            result.Status = ResetPasswordStatus.InvalidToken;
+            return result;
+        }
+        if (user.PasswordResetTokenExpiresAt < DateTime.UtcNow)
+        {
+            result.Status = ResetPasswordStatus.TokenExpired;
+            result.Email = user.Email;
+            return result;
         }
 
         user.PasswordHash = PasswordHelper.HashPassword(resetPasswordData.NewPassword);
@@ -32,7 +44,9 @@ public class ResetPasswordCommandHandler(IUserRepository userRepository)
         
         userRepository.UpdateUser(user);
         await userRepository.UnitOfWork.SaveChangesAsync();
-
-        return Unit.Value;
+        
+        result.Status = ResetPasswordStatus.Success;
+        result.AccessToken = tokenService.GenerateAccessToken(user);
+        return result;
     }
 }
