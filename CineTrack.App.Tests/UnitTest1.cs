@@ -16,7 +16,7 @@ public class AuthenticationAttributesTests
         Assert.Empty(controllerAllowAnonymous);
 
         var actionAllowAnonymous = typeof(GenresController)
-            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public)
             .SelectMany(method => method.GetCustomAttributes(typeof(AllowAnonymousAttribute), true));
         Assert.Empty(actionAllowAnonymous);
     }
