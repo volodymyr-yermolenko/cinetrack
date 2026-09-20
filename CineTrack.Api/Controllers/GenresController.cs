@@ -7,6 +7,7 @@ using CineTrack.App.Models.Genres;
 namespace CineTrack.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/genres")]
 public class GenresController(IMediator mediator): BaseController
 {

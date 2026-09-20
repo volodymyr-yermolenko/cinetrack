@@ -1,9 +1,14 @@
-﻿namespace CineTrack.App.Tests;
+﻿using CineTrack.Api.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
-public class UnitTest1
+namespace CineTrack.App.Tests;
+
+public class AuthenticationAttributesTests
 {
     [Fact]
-    public void Test1()
+    public void GenresController_RequiresAuthorization()
     {
+        var authorizeAttribute = typeof(GenresController).GetCustomAttributes(typeof(AuthorizeAttribute), true);
+        Assert.NotEmpty(authorizeAttribute);
     }
 }
