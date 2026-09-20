@@ -18,4 +18,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\CineTrack.Api\CineTrack.Api.csproj" />
+    </ItemGroup>
+
 </Project>

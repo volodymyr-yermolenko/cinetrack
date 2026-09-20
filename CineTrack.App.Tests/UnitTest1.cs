@@ -1,9 +1,23 @@
-﻿namespace CineTrack.App.Tests;
+﻿using CineTrack.Api.Controllers;
+using Microsoft.AspNetCore.Authorization;
+using System.Reflection;
 
-public class UnitTest1
+namespace CineTrack.App.Tests;
+
+public class AuthenticationAttributesTests
 {
     [Fact]
-    public void Test1()
+    public void GenresController_RequiresAuthorization()
     {
+        var authorizeAttribute = typeof(GenresController).GetCustomAttributes(typeof(AuthorizeAttribute), true);
+        Assert.NotEmpty(authorizeAttribute);
+
+        var controllerAllowAnonymous = typeof(GenresController).GetCustomAttributes(typeof(AllowAnonymousAttribute), true);
+        Assert.Empty(controllerAllowAnonymous);
+
+        var actionAllowAnonymous = typeof(GenresController)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+            .SelectMany(method => method.GetCustomAttributes(typeof(AllowAnonymousAttribute), true));
+        Assert.Empty(actionAllowAnonymous);
     }
 }
